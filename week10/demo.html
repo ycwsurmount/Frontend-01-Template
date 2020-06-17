@@ -1,0 +1,31 @@
+<div id="id">
+    <span>1</span>
+    <p>2</p>
+    <a href="#">3</a>
+    <div>4</div>
+</div>
+<!-- 子元素逆序：利用dom api移除的特点： 将div1中的子元素添加到div2时 -->
+<script>
+    var ele = document.querySelector('#id')
+
+    function reverseChildren(ele) {
+        var length = ele.children.length
+        while(length-- > 0) {
+            ele.appendChild(ele.children[length])
+        }
+    }
+
+    function reverseChildren2(ele) {
+        var range = new Range()
+        range.selectNodeContents(ele) // 选择所有选中节点
+        // 将节点拆下来
+        var fragment = range.extractContents()
+        var l = fragment.children.length
+        while(l-- > 0) {
+            fragment.appendChild(fragment.children[l])
+        }
+        ele.appendChild(fragment)
+        
+    }
+    reverseChildren2(ele)
+</script>
