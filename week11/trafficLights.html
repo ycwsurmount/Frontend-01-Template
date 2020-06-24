@@ -1,0 +1,34 @@
+<style>
+    div {
+        width: 50px;
+        height: 50px;
+        display: inline-block;
+        border-radius: 50%;
+        background-color: grey;
+    }
+    .red.light { background-color: red;}
+    .yellow.light { background-color: yellow; }
+    .green.light { background-color: green; }
+</style>
+
+<div class="red"></div>
+<div class="yellow"></div>
+<div class="green"></div>
+
+<script>
+    function sleep(time, color) {
+        return new Promise((resolve) => {
+            document.querySelector('.light') && document.querySelector('.light').classList.remove('light')
+            document.querySelector('.'+ color).classList.add('light')
+            setTimeout(resolve, time)
+        })
+    }
+    async function go () {
+        while(true) {
+            await sleep(10000, 'green')
+            await sleep(2000, 'yellow')
+            await sleep(5000, 'red')
+        }
+    }
+    go()
+</script>
